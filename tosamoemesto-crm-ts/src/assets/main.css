@@ -1,0 +1,50 @@
+@import "../../node_modules/bootstrap/dist/css/bootstrap.css";
+@import "../../node_modules/bootstrap-icons/font/bootstrap-icons.css";
+
+
+* {
+  font-family: "Google Sans";
+  box-sizing: border-box;
+}
+
+.form-control:focus, .form-select:focus {
+  box-shadow: 0 0 0 0.15rem rgba(13, 110, 253, 0.25) inset;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--bs-secondary-bg-subtle);
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--bs-primary);
+}
+
+body, html {
+  height: 100%;
+  background: var(--bs-dark);
+}
+
+.nav-link.router-link-active, .nav-link.router-link-active:hover {
+  background-color: var(--bs-primary);
+  color: var(--bs-light);
+}
+
+.nav-link.router-link-exact-active {
+  background-color: var(--bs-primary);
+  color: var(--bs-light);
+}
+
+.nav-link {
+  color: var(--bs-light);
+}
+
+.nav-link:hover {
+  background-color: var(--bs-gray-dark);
+  color: var(--bs-light);
+}
+
+
