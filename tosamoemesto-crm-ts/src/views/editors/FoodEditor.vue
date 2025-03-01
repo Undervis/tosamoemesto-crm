@@ -11,6 +11,7 @@ import { useToast } from 'vue-toastification'
 const categories = ref()
 const additions = ref()
 const food_item = ref()
+const loading = ref(false)
 
 const form = ref()
 
@@ -31,6 +32,7 @@ onBeforeMount(() => {
     useToast().error(error.message)
   })
   if (Number(current_id) > 0) {
+    loading.value = true
     axios.get(`${gProps.getApiUrl()}${router.currentRoute.value.meta.apiEndPoint}${current_id}`).then((response) => {
       food_item.value.id = response.data.id;
       food_item.value.title = response.data.title;
@@ -44,6 +46,7 @@ onBeforeMount(() => {
       response.data.accepted_additions.forEach((addition: Addition) => {
         additions.value.find((item: Addition) => item.id === addition.id).checked = true;
       })
+      loading.value = false
     }).catch((error) => {
       useToast().error(error.message)
     })
@@ -141,6 +144,7 @@ class FoodItem {
 
 <template>
   <section class="container-fluid overflow-y-scroll">
+    <progress v-if="loading" class="w-100"/>
     <div class="hstack p-2">
       <h5 class="m-0">{{ Number(current_id) > 0 ? "Редактировать блюдо" : "Новое блюдо" }}</h5>
       <button type="submit" @click="food_item.save()" class="btn btn-outline-success ms-auto"><i

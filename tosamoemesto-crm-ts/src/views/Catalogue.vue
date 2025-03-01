@@ -39,9 +39,16 @@ onMounted(() => {
 </script>
 
 <template>
-  <section v-if="loaded" class="container-fluid overflow-y-scroll" >
-    <div class="gap-2 vstack py-2">
+  <section class="container-fluid overflow-y-scroll" >
+    <progress v-if="!loaded" class="w-100"/>
+    <div v-if="loaded" class="gap-2 vstack py-2">
       <CatalogueItem v-for="item in loadedData" :type="$route.name === 'CatalogueFood' ? 'food' : 'any'" :key="item.id" :item="item" @deleteItem="getData"/>
+    </div>
+    <div v-if="!loadedData || loadedData.length === 0">
+      <div class="alert alert-info">
+        <i class="bi bi-info-circle me-2"></i>
+        <span>Записей нет</span>
+      </div>
     </div>
   </section>
 </template>

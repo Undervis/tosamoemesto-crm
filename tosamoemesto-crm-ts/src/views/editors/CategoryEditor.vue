@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {onBeforeMount, ref} from "vue";
+import { onBeforeMount, onMounted, ref } from 'vue'
 import {useRouter} from "vue-router";
 import axios from "axios";
 import ImageInput from "@/components/ImageInput.vue";
@@ -11,26 +11,19 @@ const form = ref()
 const router = useRouter()
 const current_id = router.currentRoute.value.params.id
 const foodCategory = ref()
+const loading = ref(false)
 
 onBeforeMount(() => {
   foodCategory.value = new FoodCategory()
 
   if (Number(current_id) > 0) {
+    loading.value = true
     axios.get(`${gProps.getApiUrl()}/category/${current_id}`).then((response) => {
       foodCategory.value.id = response.data.id;
       foodCategory.value.title = response.data.title;
       foodCategory.value.description = response.data.description;
       foodCategory.value.image = response.data.image;
-      console.log(response.data);
-    }).catch((error) => {
-      useToast().error(error.message)
-    })
-  } else {
-    axios.get(`${gProps.getApiUrl()}/category`).then((response) => {
-      foodCategory.value.id = response.data.id;
-      foodCategory.value.title = response.data.title;
-      foodCategory.value.description = response.data.description;
-      foodCategory.value.image = response.data.image;
+      loading.value = false
     }).catch((error) => {
       useToast().error(error.message)
     })
@@ -74,6 +67,7 @@ class FoodCategory {
 
 <template>
   <section class="container-fluid overflow-y-scroll">
+    <progress v-if="loading" class="w-100"/>
     <div class="hstack p-2">
       <h5 class="m-0">{{ Number(current_id) > 0 ? "Редактировать категорию" : "Новая категория" }}</h5>
       <button type="submit" @click="foodCategory.save()" class="btn btn-outline-success ms-auto"><i
