@@ -1,11 +1,7 @@
-<script setup>
-
-</script>
+<script setup></script>
 
 <template>
-<h4>Домашняя страница</h4>
+  <h4>Домашняя страница</h4>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

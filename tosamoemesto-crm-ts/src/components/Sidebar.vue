@@ -1,6 +1,4 @@
-<script setup>
-
-</script>
+<script setup></script>
 
 <template>
   <div class="d-flex flex-column flex-shrink-0 px-2 h-100" style="width: auto; min-width: 12rem">
@@ -25,13 +23,23 @@
         <div>
           <ul class="list-group-flush p-0">
             <li class="list-group-item position-relative">
-              <router-link :to="{name: 'CatalogueCategory'}" class="nav-link rounded-0 stretched-link">Категории</router-link>
+              <router-link
+                :to="{ name: 'CatalogueCategory' }"
+                class="nav-link rounded-0 stretched-link"
+                >Категории</router-link
+              >
             </li>
             <li class="list-group-item position-relative">
-              <router-link :to="{name: 'CatalogueFood'}" class="nav-link rounded-0 stretched-link">Блюда</router-link>
+              <router-link :to="{ name: 'CatalogueFood' }" class="nav-link rounded-0 stretched-link"
+                >Блюда</router-link
+              >
             </li>
             <li class="list-group-item position-relative">
-              <router-link :to="{name: 'CatalogueAdditions'}" class="nav-link rounded-0 stretched-link">Дополнения</router-link>
+              <router-link
+                :to="{ name: 'CatalogueAdditions' }"
+                class="nav-link rounded-0 stretched-link"
+                >Дополнения</router-link
+              >
             </li>
           </ul>
         </div>
@@ -52,6 +60,4 @@
   </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

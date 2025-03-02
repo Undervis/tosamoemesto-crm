@@ -13,43 +13,66 @@ const router = createRouter({
       path: '/orders',
       component: Orders,
       name: 'Orders',
-      meta: { type: 'list', verboseName: 'Заказы', pluralVerboseName: 'Заказ', apiEndPoint: '/orders' }
+      meta: {
+        type: 'list',
+        verboseName: 'Заказы',
+        pluralVerboseName: 'Заказ',
+        apiEndPoint: '/orders',
+      },
     },
     {
-      path: '/catalogue', component: Catalogue, name: 'Catalogue', children: [
+      path: '/catalogue',
+      component: Catalogue,
+      name: 'Catalogue',
+      children: [
         {
           path: '/catalogue/food',
           component: Catalogue,
           name: 'CatalogueFood',
-          meta: { type: 'list', verboseName: 'Блюда', pluralVerboseName: 'Блюдо', apiEndPoint: '/food' }
+          meta: {
+            type: 'list',
+            verboseName: 'Блюда',
+            pluralVerboseName: 'Блюдо',
+            apiEndPoint: '/food',
+          },
         },
         {
           path: '/catalogue/additions',
           component: Catalogue,
           name: 'CatalogueAdditions',
-          meta: { type: 'list', verboseName: 'Дополнения', pluralVerboseName: 'Дополнение', apiEndPoint: '/addition' }
+          meta: {
+            type: 'list',
+            verboseName: 'Дополнения',
+            pluralVerboseName: 'Дополнение',
+            apiEndPoint: '/addition',
+          },
         },
         {
           path: '/catalogue/category',
           component: Catalogue,
           name: 'CatalogueCategory',
-          meta: { type: 'list', verboseName: 'Категории', pluralVerboseName: 'Категория', apiEndPoint: '/category' }
-        }
-      ]
+          meta: {
+            type: 'list',
+            verboseName: 'Категории',
+            pluralVerboseName: 'Категория',
+            apiEndPoint: '/category',
+          },
+        },
+      ],
     },
     {
       path: '/catalogue/foods/edit/:id',
       component: FoodEditor,
       name: 'FoodEditor',
-      meta: { type: 'editor', apiEndPoint: `/food/`, parent: "CatalogueFood" }
+      meta: { type: 'editor', apiEndPoint: `/food/`, parent: 'CatalogueFood' },
     },
     {
       path: '/catalogue/category/edit/:id',
       component: CategoryEditor,
       name: 'CategoryEditor',
-      meta: { type: 'editor', apiEndPoint: `/category/`, parent: "CatalogueCategory" }
-    }
-  ]
+      meta: { type: 'editor', apiEndPoint: `/category/`, parent: 'CatalogueCategory' },
+    },
+  ],
 })
 
 export default router

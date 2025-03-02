@@ -1,18 +1,18 @@
 <script setup>
-import {ref, watch} from "vue";
+import { ref, watch } from 'vue'
 
-const {data = [], type = "checkbox"} = defineProps(["data", "type"])
-const emiter = defineEmits(["checked"])
+const { data = [], type = 'checkbox' } = defineProps(['data', 'type'])
+const emiter = defineEmits(['checked'])
 
-let new_data = ref(data)
+const new_data = ref(data)
 new_data.value.forEach((item) => {
   item.checked = false
 })
 
-const search_query = ref("")
+const search_query = ref('')
 
 function sortData() {
-  new_data.value.sort((a, b) => b.checked - a.checked || a.id - b.id);
+  new_data.value.sort((a, b) => b.checked - a.checked || a.id - b.id)
 }
 
 watch(search_query, (value, oldValue, onCleanup) => {
@@ -23,25 +23,38 @@ watch(search_query, (value, oldValue, onCleanup) => {
 watch(new_data.value, (newVal, oldVal) => {
   setTimeout(() => {
     sortData()
-    emiter("checked", new_data.value)
+    emiter('checked', new_data.value)
   }, 100)
 })
-
 </script>
 
 <template>
   <section class="custom-selector">
     <div>
-      <input type="search" class="form-control border-0 border-bottom rounded-0 bg-transparent" v-model="search_query"
-             placeholder="Поищем...">
+      <input
+        type="search"
+        class="form-control border-0 border-bottom rounded-0 bg-transparent"
+        v-model="search_query"
+        placeholder="Поищем..."
+      />
     </div>
     <div v-for="item in new_data" class="custom-selector-item">
       <div class="row gap-2">
         <div class="col-auto pe-0">
-          <img v-if="item.image" :src="item.image" class="img-fluid rounded-1 m-1" alt=""
-               style="aspect-ratio: 1; object-fit: cover; width: 3.5rem">
-          <img v-else src="@/assets/placeholder.png" class="img-fluid rounded-1 m-1" alt=""
-               style="aspect-ratio: 1; object-fit: cover; width: 3.5rem">
+          <img
+            v-if="item.image"
+            :src="item.image"
+            class="img-fluid rounded-1 m-1"
+            alt=""
+            style="aspect-ratio: 1; object-fit: cover; width: 3.5rem"
+          />
+          <img
+            v-else
+            src="@/assets/placeholder.png"
+            class="img-fluid rounded-1 m-1"
+            alt=""
+            style="aspect-ratio: 1; object-fit: cover; width: 3.5rem"
+          />
         </div>
         <div class="col d-flex ps-0">
           <div class="vstack my-auto">
@@ -50,7 +63,7 @@ watch(new_data.value, (newVal, oldVal) => {
           </div>
         </div>
         <div class="col-auto d-flex">
-          <input :type="type" name="selector" v-model="item.checked" class="me-3">
+          <input :type="type" name="selector" v-model="item.checked" class="me-3" />
         </div>
       </div>
     </div>

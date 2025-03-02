@@ -3,7 +3,7 @@ import { onBeforeMount, onMounted, onUnmounted, ref, watch } from 'vue'
 
 const fileInput = ref()
 const imageEl = ref()
-const status = ref({inLoad: true, isLoaded: false})
+const status = ref({ inLoad: true, isLoaded: false })
 
 const props = defineProps(['imgUrl'])
 const emit = defineEmits(['uploaded'])
@@ -13,14 +13,18 @@ onMounted(() => {
   checkImage()
 })
 
-watch(props, () => {
-  checkImage()
-}, {immediate: true})
+watch(
+  props,
+  () => {
+    checkImage()
+  },
+  { immediate: true },
+)
 
 let tryLoad: any
 
 function checkImage() {
-  if (props.imgUrl !== "" && typeof props.imgUrl !== "undefined") {
+  if (props.imgUrl !== '' && typeof props.imgUrl !== 'undefined') {
     status.value.inLoad = false
     status.value.isLoaded = true
     tryLoad = setInterval(() => {
@@ -29,7 +33,7 @@ function checkImage() {
 
     setTimeout(() => {
       clearInterval(tryLoad)
-      imageEl.value.alt = "Не удалось загрузить изображение"
+      imageEl.value.alt = 'Не удалось загрузить изображение'
     }, 5000)
   } else {
     status.value.inLoad = false
@@ -40,35 +44,41 @@ onUnmounted(() => {
   clearInterval(tryLoad)
 })
 
-function fileLoaded(evt: Event)  {
+function fileLoaded(evt: Event) {
   status.value.isLoaded = true
-  let tgt = evt.target,
-      files = tgt?.files;
+  const tgt = evt.target,
+    files = tgt?.files
   // FileReader support
   if (FileReader && files && files.length) {
-    let fr = new FileReader();
+    const fr = new FileReader()
     fr.onload = function () {
-      imageEl.value.src = fr.result;
+      imageEl.value.src = fr.result
       emit('uploaded', fr.result)
     }
-    fr.readAsDataURL(files[0]);
+    fr.readAsDataURL(files[0])
   }
 }
 </script>
 
 <template>
-<section>
-  <div class="form-control p-0" style="width: fit-content" @click="fileInput.click()">
-    <div v-if="!status.isLoaded" class="image-frame-placeholder rounded-1 m-1">
-      <i class="bi bi-image fs-1 m-auto"></i>
+  <section>
+    <div class="form-control p-0" style="width: fit-content" @click="fileInput.click()">
+      <div v-if="!status.isLoaded" class="image-frame-placeholder rounded-1 m-1">
+        <i class="bi bi-image fs-1 m-auto"></i>
+      </div>
+      <div v-else class="image-frame">
+        <img class="img-fluid rounded image-frame-content" ref="imageEl" alt="" />
+      </div>
     </div>
-    <div v-else class="image-frame">
-      <img class="img-fluid rounded image-frame-content" ref="imageEl" alt="">
-    </div>
-  </div>
-  <input ref="fileInput" accept="image/jpeg, image/png" type="file" @change="(e) => fileLoaded(e)" hidden>
-  <progress v-show="status.inLoad" class="w-100"/>
-</section>
+    <input
+      ref="fileInput"
+      accept="image/jpeg, image/png"
+      type="file"
+      @change="(e) => fileLoaded(e)"
+      hidden
+    />
+    <progress v-show="status.inLoad" class="w-100" />
+  </section>
 </template>
 
 <style scoped>
@@ -89,7 +99,7 @@ function fileLoaded(evt: Event)  {
   object-fit: cover;
   object-position: center;
   aspect-ratio: 1;
-  border-radius: .2rem;
+  border-radius: 0.2rem;
   transition: 0.2s;
 }
 

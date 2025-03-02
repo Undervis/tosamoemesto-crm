@@ -1,13 +1,13 @@
-@import "../../node_modules/bootstrap/dist/css/bootstrap.css";
-@import "../../node_modules/bootstrap-icons/font/bootstrap-icons.css";
-
+@import '../../node_modules/bootstrap/dist/css/bootstrap.css';
+@import '../../node_modules/bootstrap-icons/font/bootstrap-icons.css';
 
 * {
-  font-family: "Google Sans";
+  font-family: 'Google Sans';
   box-sizing: border-box;
 }
 
-.form-control:focus, .form-select:focus {
+.form-control:focus,
+.form-select:focus {
   box-shadow: 0 0 0 0.15rem rgba(13, 110, 253, 0.25) inset;
 }
 
@@ -23,12 +23,14 @@
   background: var(--bs-primary);
 }
 
-body, html {
+body,
+html {
   height: 100%;
   background: var(--bs-dark);
 }
 
-.nav-link.router-link-active, .nav-link.router-link-active:hover {
+.nav-link.router-link-active,
+.nav-link.router-link-active:hover {
   background-color: var(--bs-primary);
   color: var(--bs-light);
 }
@@ -46,5 +48,3 @@ body, html {
   background-color: var(--bs-gray-dark);
   color: var(--bs-light);
 }
-
-
