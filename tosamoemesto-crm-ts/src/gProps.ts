@@ -1,43 +1,52 @@
 import type { Router } from 'vue-router'
 import { useRouter } from 'vue-router'
 import axios from 'axios'
+import { useToast } from 'vue-toastification'
 
 class gProps {
+  private _authToken: string = ""
+
+  set authToken(value: string) {
+    this._authToken = value
+  }
+
   getApiUrl(): string {
-    return "http://" + document.location.hostname + ":8080/"
+    return "http://" + document.location.hostname + ":7000/"
   }
 
-  getAuthHeader(token: string): object {
-    return { headers: { Authorization: `Token ${token}` } }
+  getAuthHeader(): object {
+    return { headers: { Authorization: `Token ${this._authToken}` } }
   }
 
-  http(
-    method: string = 'GET',
-    router: Router = useRouter(),
-    params: object = {},
-    query: object = {},
-    dataToSend: object = {},
-    authToken: string = '',
-  ): object {
-    const targetUrl =
-      this.getApiUrl() + router.currentRoute.value.meta.apiEndPoint + params
-        ? params.id.toString()
-        : ''
-    axios({
-      method: method,
-      url: targetUrl,
-      params: params,
-      data: dataToSend,
-      headers: this.getAuthHeader(authToken),
-    })
-      .then((response) => {
-        console.log('response', response.data)
-        return response.data
+  crud = {
+    create: (endPoint: string, data: object) => {
+      axios.post(this.getApiUrl() + endPoint, data, this.getAuthHeader()).then(r => {
+        return r.data
+      }).catch(err => {
+        useToast().error(err.message)
       })
-      .catch((error) => {
-        console.error(error)
+    },
+    read: (endPoint: string) => {
+      axios.get(this.getApiUrl() + endPoint, this.getAuthHeader()).then(r => {
+        return r.data
+      }).catch(err => {
+        useToast().error(err.message)
       })
-    return {}
+    },
+    update: (endPoint: string, data: object) => {
+      axios.patch(this.getApiUrl() + endPoint, data, this.getAuthHeader()).then(r => {
+        return r.data
+      }).catch(err => {
+        useToast().error(err.message)
+      })
+    },
+    delete: (endPoint: string) => {
+      axios.delete(this.getApiUrl() + endPoint, this.getAuthHeader()).then(r => {
+        return r.data
+      }).catch(err => {
+        useToast().error(err.message)
+      })
+    }
   }
 }
 

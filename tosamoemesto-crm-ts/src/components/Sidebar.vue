@@ -36,7 +36,7 @@
             </li>
             <li class="list-group-item position-relative">
               <router-link
-                :to="{ name: 'CatalogueAdditions' }"
+                :to="{ name: 'CatalogueAddition' }"
                 class="nav-link rounded-0 stretched-link"
                 >Дополнения</router-link
               >

@@ -36,7 +36,7 @@ function deleteItem() {
 </script>
 
 <template>
-  <div class="card">
+  <div class="card shadow-sm">
     <div class="row">
       <div class="col-auto pe-0">
         <img
@@ -101,9 +101,6 @@ function deleteItem() {
         <div v-if="item.sizes_and_prices" class="card-footer d-flex gap-2 p-2 text-muted">
           <span
             >Время приготовления: <b>{{ item.cooking_time }} мин</b></span
-          >
-          <span
-            >Вес: <b>{{ item.weight }} г.</b></span
           >
           <span class="ms-auto"
             >Добавил: <b>@{{ item.created_by.username }}</b></span

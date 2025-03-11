@@ -4,6 +4,7 @@ import CategoryEditor from '@/views/editors/CategoryEditor.vue'
 import FoodEditor from '@/views/editors/FoodEditor.vue'
 import Catalogue from '@/views/Catalogue.vue'
 import Orders from '@/views/Orders.vue'
+import AdditionEditor from '@/views/editors/AdditionEditor.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -37,9 +38,9 @@ const router = createRouter({
           },
         },
         {
-          path: '/catalogue/additions',
+          path: '/catalogue/addition',
           component: Catalogue,
-          name: 'CatalogueAdditions',
+          name: 'CatalogueAddition',
           meta: {
             type: 'list',
             verboseName: 'Дополнения',
@@ -61,7 +62,7 @@ const router = createRouter({
       ],
     },
     {
-      path: '/catalogue/foods/edit/:id',
+      path: '/catalogue/food/edit/:id',
       component: FoodEditor,
       name: 'FoodEditor',
       meta: { type: 'editor', apiEndPoint: `/food/`, parent: 'CatalogueFood' },
@@ -71,6 +72,12 @@ const router = createRouter({
       component: CategoryEditor,
       name: 'CategoryEditor',
       meta: { type: 'editor', apiEndPoint: `/category/`, parent: 'CatalogueCategory' },
+    },
+    {
+      path: '/catalogue/addition/edit/:id',
+      component: AdditionEditor,
+      name: 'AdditionEditor',
+      meta: { type: 'editor', apiEndPoint: `/addition/`, parent: 'CatalogueAddition' },
     },
   ],
 })
